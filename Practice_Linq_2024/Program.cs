@@ -187,7 +187,7 @@ namespace Practice_Linq_2024
             //Query 8: Перетворити всі матчі Євро-2012 (UEFA Euro), які відбулися в Україні, на матчі з наступними властивостями:
             // MatchYear - рік матчу, Team1 - назва приймаючої команди, Team2 - назва гостьової команди, Goals - сума всіх голів за матч
 
-            var selectedGames = games;   // Корегуємо запит !!!
+            var selectedGamesTransf = games.Where(g => g.Tournament == "UEFA Euro" && g.Country == "Ukraine" && g.Date.Year == 2012).Select(g => new { MatchYear = g.Date.Year, Team1 = g.Home_team, Team2 = g.Away_team, Goals = g.Home_score + g.Away_score });
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 8 ========================");
@@ -206,13 +206,17 @@ namespace Practice_Linq_2024
             //Query 9: Перетворити всі матчі UEFA Nations League у 2023 році на матчі з наступними властивостями:
             // MatchYear - рік матчу, Game - назви обох команд через дефіс (першою - Home_team), Result - результат для першої команди (Win, Loss, Draw)
 
-            var selectedGames = games;   // Корегуємо запит !!!
+            var selectedGamesTransf2 = games.Where(g => g.Tournament == "UEFA Nations League" && g.Date.Year == 2023)
+                .Select(g => new{MatchYear = g.Date.Year,Game = $"{g.Home_team}-{g.Away_team}",Result = g.Home_score > g.Away_score ? "Win" : g.Home_score < g.Away_score ? "Loss" : "Draw"});
 
             // Перевірка
             Console.WriteLine("\n======================== QUERY 9 ========================");
 
             // див. приклад як має бути виведено:
-
+            foreach (var game in selectedGamesTransf2)
+            {
+                Console.WriteLine($"{game.MatchYear} {game.Game}, Result for team1: {game.Result}");
+            }
 
         }
 
