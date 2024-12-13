@@ -193,8 +193,10 @@ namespace Practice_Linq_2024
             Console.WriteLine("\n======================== QUERY 8 ========================");
 
             // див. приклад як має бути виведено:
-
-
+            foreach (var game in selectedGamesTransf)
+            {
+                Console.WriteLine($"{game.MatchYear} {game.Team1} - {game.Team2}, Goals: {game.Goals}");
+            }
         }
 
 
